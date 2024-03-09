@@ -1,12 +1,17 @@
 {
-  "name": "Hello Extensions",
+  "name": "Youtube Comment Filter",
   "description": "Base Level Extension",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "you.png"
+    }
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "activeTab",
+    "storage"
   ]
 }
