@@ -6,7 +6,7 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "Youtube_Logo.png"
+      "16": "Youtube_Logo.png"
     }
   },
   "permissions": [
