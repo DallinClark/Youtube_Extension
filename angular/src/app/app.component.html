@@ -1,10 +1,10 @@
 <div onload="load()">
-  <h1>YouTube Extension</h1>
+  <h1>Youtube Comment Filter</h1>
   <h3 *ngIf="error">{{ error }}</h3>
 
   <h2 *ngIf="average" [style.color]="getColor()">Average: {{ average | number: '1.0-0' }}</h2>
 
-  <div class="custom-select-wrapper">
+  <div *ngIf="!error" class="custom-select-wrapper">
     <select class="custom-select" *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
       <option value="positive">Positive First</option>
       <option value="negative">Negative First</option>
