@@ -87,3 +87,17 @@ ul li {
   border: none; /* This removes the border */
   background-color: #f0f0f0; /* Example color */
 }
+
+/* Style the dropdown menu itself */
+select {
+  padding: 4px; /* Adds padding inside the dropdown */
+  border: none;
+  border-radius: 8px; /* Rounds the corners of the dropdown */
+  background-color: #f0f0f0; /* Sets the background color */
+}
+
+/* Optional: Style the dropdown options */
+select option {
+  padding: 8px; /* Adds padding inside each option */
+  background-color: #fff; /* Sets a different background color for options */
+}
