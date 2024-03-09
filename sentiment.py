@@ -12,7 +12,10 @@ strings = [
     "I feel neutral about this movie.",
     "I love spending time with my family.",
     "The food at that restaurant was terrible."
+<<<<<<< HEAD
     "I love you."
+=======
+>>>>>>> main
 ]
 
 # Rank strings by sentiment
