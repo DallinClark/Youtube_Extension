@@ -14,6 +14,8 @@ li {
   border-radius: 4px;
   padding: 12px;
   margin-bottom: 8px;
+  width: 400px;
+  word-wrap: break-word;
 }
 
 strong {
@@ -28,4 +30,47 @@ span {
 
 p {
   margin-top: 8px;
+
+}
+
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.custom-select-wrapper {
+  position: relative;
+  width: 200px;
+  font-family: Arial, sans-serif;
+}
+
+.custom-select {
+  appearance: none; /* Remove default arrow */
+  background-color: #f0f0f0;
+  border: 2px solid #000;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.custom-select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  top: 0;
+  right: 15px;
+  bottom: 0;
+  font-size: 12px;
+  color: #000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
 }

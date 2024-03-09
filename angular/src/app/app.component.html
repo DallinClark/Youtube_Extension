@@ -4,10 +4,12 @@
 
   <h3 *ngIf="average">Average: {{ average | number: '1.0-0' }}</h3>
 
-  <select *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
-    <option value="positive">Positive First</option>
-    <option value="negative">Negative First</option>
-  </select>
+  <div class="custom-select-wrapper">
+    <select class="custom-select" *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
+      <option value="positive">Positive First</option>
+      <option value="negative">Negative First</option>
+    </select>
+  </div>
 
   <ul *ngIf="!error">
     <li *ngFor="let comment of comments">
@@ -16,7 +18,7 @@
         <strong>{{ comment.author }}</strong>
         <span>{{ comment.date }}</span>
       </div>
-      <p>{{ comment.text }}</p>
+      <p class="over">{{ comment.text }}</p>
     </li>
   </ul>
 </div>
