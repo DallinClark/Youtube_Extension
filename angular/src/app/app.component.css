@@ -1,31 +1,40 @@
 h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 12px;
-  margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 8px;
 }
 
 strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 span {
-  font-size: 12px;
-  color: #666;
-  margin-left: 8px;
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
 }
 
 p {
-  margin-top: 8px;
+    margin-top: 8px;
+}
+
+.comment-container {
+    display: flex; 
+}
+
+.comment-number {
+    margin-right: 12px;
+    justify-content: center;
 }
