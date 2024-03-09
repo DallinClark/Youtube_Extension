@@ -20,9 +20,13 @@ interface Comment {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  title = 'angular';
+
   key: string = "AIzaSyCgkOGTu8drhwATKnA4y-gVhu6-3O1FO4w"
-  comments: Comment[] = []
   error: string | null = null
+
+  average: number | null = null
+  comments: Comment[] = []
 
   constructor(private cdRef: ChangeDetectorRef) { }
 
@@ -49,7 +53,7 @@ export class AppComponent implements OnInit {
 
 
   async getComments(id: string) {
-    const commentNumber = 10
+    const commentNumber = 50
     const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=${commentNumber}&order=relevance&textFormat=plainText&videoId=${id}&key=${this.key}`)
     
     console.log(res)
@@ -59,7 +63,7 @@ export class AppComponent implements OnInit {
         author: items[i].snippet.topLevelComment.snippet.authorDisplayName,
         date: items[i].snippet.topLevelComment.snippet.publishedAt,
         text: items[i].snippet.topLevelComment.snippet.textDisplay,
-        value: 0
+        value: 0,
       }
       this.comments.push(comment)
     }
@@ -69,17 +73,22 @@ export class AppComponent implements OnInit {
 
   runPythonSentiment(){
     let s = new sentiment();
-    
+    let sum = 0;
+
     for (let i = 0; i < this.comments.length; i++) {
       let result = s.analyze(this.comments[i].text);
-      this.comments[i].value = result.comparative
+      this.comments[i].value = (result.comparative + 1) * 50;
+      sum += this.comments[i].value;
     }
 
     this.comments.sort(function (a,b) {
       return b.value - a.value
     })
 
+    this.average = sum / this.comments.length
+
     console.log(this.comments)
+    this.cdRef.detectChanges();
     
     // child.exec('python sentiment.py', (error, stdout, stderr) => {
     //   if (error) {
