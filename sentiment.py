@@ -11,7 +11,8 @@ strings = [
     "The weather is nice today.",
     "I feel neutral about this movie.",
     "I love spending time with my family.",
-    "The food at that restaurant was terrible."
+    "The food at that restaurant was terrible.",
+    "I love you."
 ]
 
 # Rank strings by sentiment
