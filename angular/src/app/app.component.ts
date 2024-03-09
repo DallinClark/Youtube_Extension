@@ -10,4 +10,12 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'angular';
+
+  constructor() {
+    console.log('AppComponent constructor');
+  }
+
+  onButtonClick() {
+    console.log('Button clicked');
+  }
 }
