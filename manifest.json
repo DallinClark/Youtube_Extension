@@ -1,10 +1,17 @@
 {
-  "name": "Hello Extensions",
-  "description": "Base Level Extension",
-  "version": "1.0",
   "manifest_version": 3,
+  "name": "YouTube Comment Scraper",
+  "version": "1.0",
+  "description": "A simple Chrome extension to scrape YouTube comments",
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "hello_extensions.png"
-  }
+    "default_icon": {
+      "16": "hello_extensions.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
 }
+
