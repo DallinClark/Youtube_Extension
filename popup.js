@@ -1,5 +1,18 @@
 const axios = require('axios');
 
+// Function to fetch the video ID of the currently active tab
+function getVideoId(callback) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      const tab = tabs[0];
+      if (tab) {
+        const videoId = extractVideoId(new URL(tab.url));
+        callback(videoId);
+      } else {
+        console.error('Error: Could not get active tab.');
+      }
+    });
+  }
+
 async function getComments(videoId, apiKey) {
 
     let raw_comments = []
@@ -43,7 +56,9 @@ async function getComments(videoId, apiKey) {
 // Replace 'YOUR_API_KEY' with your actual YouTube Data API key
 const API_KEY = 'AIzaSyADXH44QlQYsv6jiTEC7L-7DQUwrP-m618';
 
+
+
 // Replace 'VIDEO_ID' with the ID of the YouTube video you want to scrape comments from
-const VIDEO_ID = '0FtcHjI5lmw';
+const VIDEO_ID = getVideoId();
 
 getComments(VIDEO_ID, API_KEY);
