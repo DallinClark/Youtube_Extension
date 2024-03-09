@@ -29,3 +29,8 @@ span {
 p {
   margin-top: 8px;
 }
+
+ul li {
+  border: none;
+  background-color: #f0f0f0;
+}
