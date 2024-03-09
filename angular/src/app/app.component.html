@@ -3,7 +3,13 @@
   <h3 *ngIf="error">{{ error }}</h3>
 
   <h3 *ngIf="average">Average: {{ average | number: '1.0-0' }}</h3>
-  <ul>
+
+  <select *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
+    <option value="positive">Positive First</option>
+    <option value="negative">Negative First</option>
+  </select>
+
+  <ul *ngIf="!error">
     <li *ngFor="let comment of comments">
       <h4>{{ comment.value | number: '1.0-0' }}</h4>
       <div>
