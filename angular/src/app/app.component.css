@@ -82,3 +82,8 @@ p {
     margin-right: 12px;
     justify-content: center;
 }
+
+ul li {
+  border: none; /* This removes the border */
+  background-color: #f0f0f0; /* Example color */
+}
