@@ -10,6 +10,7 @@ interface Comment {
   author: string;
   date: string;
   text: string;
+  value: number;
 }
 
 @Component({
@@ -52,10 +53,11 @@ export class AppComponent implements OnInit {
     console.log(res)
     const items = res.data.items
     for (let i = 0; i < items.length; i++) {
-      const comment = {
+      const comment : Comment = {
         author: items[i].snippet.topLevelComment.snippet.authorDisplayName,
         date: items[i].snippet.topLevelComment.snippet.publishedAt,
-        text: items[i].snippet.topLevelComment.snippet.textDisplay
+        text: items[i].snippet.topLevelComment.snippet.textDisplay,
+        value: 0
       }
       this.comments.push(comment)
     }
@@ -64,9 +66,19 @@ export class AppComponent implements OnInit {
   }
 
   runPythonSentiment(){
-    var s = new sentiment();
-    var result = s.analyze('Cats are stupid.');
-    console.dir(result); 
+    let s = new sentiment();
+    
+    for (let i = 0; i < this.comments.length; i++) {
+      let result = s.analyze(this.comments[i].text);
+      this.comments[i].value = result.comparative
+    }
+
+    this.comments.sort(function (a,b) {
+      return b.value - a.value
+    })
+
+    console.log(this.comments)
+    
     // child.exec('python sentiment.py', (error, stdout, stderr) => {
     //   if (error) {
     //     console.error(`exec error: ${error}`);
