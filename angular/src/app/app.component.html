@@ -1,6 +1,7 @@
-<div>
+<div onload="load()">
   <h1>YouTube Extension</h1>
   <h2>{{ currentTabUrl }}</h2>
+  <button (click)="getComments">Load Comments</button>
   <ul>
     <li *ngFor="let comment of comments">
       <div>

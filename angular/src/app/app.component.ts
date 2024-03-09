@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
+import { exec } from 'child_process';
+import axios from 'axios';
 declare const chrome: any;
 
 interface Comment {
@@ -18,6 +20,13 @@ interface Comment {
 })
 export class AppComponent implements OnInit {
   title = 'angular';
+  key = "AIzaSyCgkOGTu8drhwATKnA4y-gVhu6-3O1FO4w"
+  comments: Comment[] = []
+  async ngOnInit() {
+    alert("hi")
+    console.log("hi")
+    await this.getComments()
+  }
 
   currentTabUrl: string = 'loading...';
 
@@ -54,6 +63,34 @@ export class AppComponent implements OnInit {
       author: 'Bob Johnson',
       date: '2023-03-06',
       text: 'Great content! Keep up the good work.'
+
+  async getComments() {
+    const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=100&order=relevance&textFormat=plainText&videoId=zeD0g5xXo7E&key=${this.key}`)
+    console.log(res)
+    const items = res.data.items
+    for (let i = 0; i < items.length; i++) {
+      const comment = {
+        author: items[i].snippet.topLevelComment.snippet.authorDisplayName,
+        date: items[i].snippet.topLevelComment.snippet.publishedAt,
+        text: items[i].snippet.topLevelComment.snippet.textDisplay
+      }
+      this.comments.push(comment)
     }
-  ];
+    console.log(this.comments)
+  }
+
+  
+}
+
+function runPythonSentiment(){
+  exec('python sentiment.py', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    if (stderr) {
+      console.error(`stderr: ${stderr}`);
+    }
+  });
 }
