@@ -104,5 +104,27 @@ export class AppComponent implements OnInit {
       this.cdRef.detectChanges();
     });
   }
+
+  getColor(comment: Comment | null = null) {
+    var score: number | null = null;
+
+    if (comment) {
+      score = comment.value;
+    } else {
+      score = this.average;
+    }
+
+    if (score != null) {
+      if (score > 65) {
+        return 'rgb(0, 128, 0)'; // green
+      } else if (score >= 45) {
+        return 'rgb(200, 165, 0)'; // yellow
+      } else {
+        return 'rgb(255, 0, 0)'; // red
+      }
+    } else {
+      return 'rgb(100, 100, 100)'; // grey
+    }
+  }
 }
 
