@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import axios from 'axios';
 import sentiment from 'sentiment'
 import { FormsModule } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 declare const chrome: any;
 
@@ -13,6 +14,7 @@ interface Comment {
   text: string;
   value: number;
 }
+
 
 @Component({
   selector: 'app-root',
@@ -33,6 +35,12 @@ export class AppComponent implements OnInit {
   sortMode: string = "positive"
 
   constructor(private cdRef: ChangeDetectorRef, private zone: NgZone) { }
+
+  formatDateDisplay(dateString: string): string {
+    // Assuming 'en-US' locale, you can change this as needed
+    const locale = 'en-US';
+    return formatDate(dateString, 'medium', locale);
+  }
 
   getYoutubeVideoId(url: string): string | null {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.{11})/;
