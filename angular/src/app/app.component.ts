@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 // import * as child from 'child_process';
 import axios from 'axios';
+declare const chrome: any;
 import sentiment from 'sentiment'
 
 interface Comment {
@@ -22,9 +23,26 @@ export class AppComponent implements OnInit {
   title = 'angular';
   key = "AIzaSyCgkOGTu8drhwATKnA4y-gVhu6-3O1FO4w"
   comments: Comment[] = []
+
+  currentTabUrl: string = 'loading...';
+
+  constructor(private cdRef: ChangeDetectorRef) { }
+
+  getYoutubeVideoId(url: string): string {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.{11})/;
+    const match = url.match(regex);
+    console.log(match);
+    return match && match[1].length === 11 ? match[1] : 'Not a valid YouTube URL.';
+  };
+
   async ngOnInit() {
-    alert("hi")
-    console.log("hi")
+    
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs: any) => {
+      if (tabs.length > 0) {
+        this.currentTabUrl = this.getYoutubeVideoId(tabs[0].url);
+        this.cdRef.detectChanges();
+      }
+    })
     await this.getComments()
   }
 
