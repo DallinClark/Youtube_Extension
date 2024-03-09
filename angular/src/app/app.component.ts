@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { exec } from 'child_process';
+// import * as child from 'child_process';
 import axios from 'axios';
+import sentiment from 'sentiment'
 
 interface Comment {
   author: string;
@@ -41,20 +42,25 @@ export class AppComponent implements OnInit {
       this.comments.push(comment)
     }
     console.log(this.comments)
+    this.runPythonSentiment()
   }
 
-  
+  runPythonSentiment(){
+    var s = new sentiment();
+    var result = s.analyze('Cats are stupid.');
+    console.dir(result); 
+    // child.exec('python sentiment.py', (error, stdout, stderr) => {
+    //   if (error) {
+    //     console.error(`exec error: ${error}`);
+    //     return;
+    //   }
+    //   console.log(`stdout: ${stdout}`);
+    //   if (stderr) {
+    //     console.error(`stderr: ${stderr}`);
+    //   }
+    // });
+  }
+
 }
 
-function runPythonSentiment(){
-  exec('python sentiment.py', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-    }
-  });
-}
+
