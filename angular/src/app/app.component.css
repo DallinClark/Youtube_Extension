@@ -1,12 +1,12 @@
 h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
@@ -19,18 +19,17 @@ li {
 }
 
 strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 span {
-  font-size: 12px;
-  color: #666;
-  margin-left: 8px;
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
 }
 
 p {
   margin-top: 8px;
-
 }
 
 .select::after {
@@ -73,4 +72,13 @@ p {
   pointer-events: none;
   display: flex;
   align-items: center;
+}
+
+.comment-container {
+    display: flex; 
+}
+
+.comment-number {
+    margin-right: 12px;
+    justify-content: center;
 }
