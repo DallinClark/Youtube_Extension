@@ -1,15 +1,17 @@
 <div onload="load()">
   <h1>YouTube Extension</h1>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-    </div>
-  </div>
   <h3 *ngIf="error">{{ error }}</h3>
 
   <h3 *ngIf="average">Average: {{ average | number: '1.0-0' }}</h3>
-  <ul>
+
+  <select *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
+    <option value="positive">Positive First</option>
+    <option value="negative">Negative First</option>
+    <option value="longest">Longest First</option>
+    <option value="shortest">Shortest First</option>
+  </select>
+
+  <ul *ngIf="!error">
     <li *ngFor="let comment of comments">
       <h4>{{ comment.value | number: '1.0-0' }}</h4>
       <div>

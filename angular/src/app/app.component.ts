@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import axios from 'axios';
-declare const chrome: any;
 import sentiment from 'sentiment'
+import { FormsModule } from '@angular/forms';
+
+declare const chrome: any;
 
 interface Comment {
   author: string;
@@ -15,7 +17,7 @@ interface Comment {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BrowserModule],
+  imports: [RouterOutlet, BrowserModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -28,7 +30,9 @@ export class AppComponent implements OnInit {
   average: number | null = null
   comments: Comment[] = []
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  sortMode: string = "positive"
+
+  constructor(private cdRef: ChangeDetectorRef, private zone: NgZone) { }
 
   getYoutubeVideoId(url: string): string | null {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.{11})/;
@@ -37,7 +41,6 @@ export class AppComponent implements OnInit {
   };
 
   async ngOnInit() {
-    
     await chrome.tabs.query({active: true, currentWindow: true}, async (tabs: any) => {
       if (tabs.length > 0) {
         const id = this.getYoutubeVideoId(tabs[0].url)
@@ -50,7 +53,6 @@ export class AppComponent implements OnInit {
       }
     })
   }
-
 
   async getComments(id: string) {
     const commentNumber = 50
@@ -81,17 +83,26 @@ export class AppComponent implements OnInit {
       sum += this.comments[i].value;
     }
 
-    this.comments.sort(function (a,b) {
-      return b.value - a.value
-    })
-
     this.average = sum / this.comments.length
-
-    console.log(this.comments)
-    this.cdRef.detectChanges();
+    this.sortComments();
     
 
   }
 
+  sortComments() {
+    this.zone.run(() => {
+      if (this.sortMode == "positive") {
+        this.comments.sort((a, b) => b.value - a.value)
+      } else if (this.sortMode == "negative") {
+        this.comments.sort((a, b) => a.value - b.value)
+      } else if(this.sortMode == "longest"){
+        this.comments.sort((a, b) => b.text.length - a.text.length);
+      } else if(this.sortMode == "shortest"){
+        this.comments.sort((a, b) => a.text.length - b.text.length);
+      }
+
+      this.cdRef.detectChanges();
+    });
+  }
 }
 
