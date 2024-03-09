@@ -90,18 +90,8 @@ export class AppComponent implements OnInit {
     console.log(this.comments)
     this.cdRef.detectChanges();
     
-    // child.exec('python sentiment.py', (error, stdout, stderr) => {
-    //   if (error) {
-    //     console.error(`exec error: ${error}`);
-    //     return;
-    //   }
-    //   console.log(`stdout: ${stdout}`);
-    //   if (stderr) {
-    //     console.error(`stderr: ${stderr}`);
-    //   }
-    // });
+
   }
 
 }
-
 
