@@ -19,7 +19,7 @@
         <h2 [style.color]="getColor(comment)" class="comment-number">{{ comment.value | number: '1.0-0' }}</h2>
         <div class="comment-details">
           <strong>{{ comment.author }}</strong>
-          <span>{{ comment.date }}</span>
+          <span>{{ formatDateDisplay(comment.date) }}</span>
           <p>{{ comment.text }}</p>
         </div>
       </div>
