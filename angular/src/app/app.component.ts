@@ -86,16 +86,7 @@ export class AppComponent implements OnInit {
     this.average = sum / this.comments.length
     this.sortComments();
     
-    // child.exec('python sentiment.py', (error, stdout, stderr) => {
-    //   if (error) {
-    //     console.error(`exec error: ${error}`);
-    //     return;
-    //   }
-    //   console.log(`stdout: ${stdout}`);
-    //   if (stderr) {
-    //     console.error(`stderr: ${stderr}`);
-    //   }
-    // });
+
   }
 
   sortComments() {
@@ -104,11 +95,14 @@ export class AppComponent implements OnInit {
         this.comments.sort((a, b) => b.value - a.value)
       } else if (this.sortMode == "negative") {
         this.comments.sort((a, b) => a.value - b.value)
+      } else if(this.sortMode == "longest"){
+        this.comments.sort((a, b) => b.text.length - a.text.length);
+      } else if(this.sortMode == "shortest"){
+        this.comments.sort((a, b) => a.text.length - b.text.length);
       }
 
       this.cdRef.detectChanges();
     });
   }
 }
-
 

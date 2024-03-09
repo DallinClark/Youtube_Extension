@@ -7,6 +7,8 @@
   <select *ngIf="!error" [(ngModel)]="sortMode" (change)="sortComments()">
     <option value="positive">Positive First</option>
     <option value="negative">Negative First</option>
+    <option value="longest">Longest First</option>
+    <option value="shortest">Shortest First</option>
   </select>
 
   <ul *ngIf="!error">
