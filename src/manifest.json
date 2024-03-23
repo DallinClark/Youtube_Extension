@@ -1,12 +1,12 @@
 {
   "name": "YouTube Comment Filter",
-  "description": "Base Level Extension",
+  "description": "A simple Chrome extension for sorting YouTube comments by sentiment and length.",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
     "default_icon": {
-      "16": "you.png"
+      "16": "assets/logo.png"
     }
   },
   "permissions": [
